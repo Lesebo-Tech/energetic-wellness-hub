@@ -8,52 +8,53 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 285 100% 25%;
+    --background: 60 17% 96%;
+    --foreground: 0 0% 29%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 285 100% 25%;
+    --card: 60 17% 96%;
+    --card-foreground: 0 0% 29%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 285 100% 25%;
+    --popover: 60 17% 96%;
+    --popover-foreground: 0 0% 29%;
 
-    --primary: 285 100% 35%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 300 100% 75%;
+    --primary: 140 35% 75%;
+    --primary-foreground: 0 0% 29%;
+    --primary-glow: 140 50% 85%;
 
-    --secondary: 280 20% 95%;
-    --secondary-foreground: 285 100% 25%;
+    --secondary: 200 50% 87%;
+    --secondary-foreground: 0 0% 29%;
 
-    --muted: 280 20% 96%;
-    --muted-foreground: 285 30% 45%;
+    --muted: 60 17% 94%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 320 80% 85%;
-    --accent-foreground: 285 100% 25%;
+    --accent: 28 100% 86%;
+    --accent-foreground: 0 0% 29%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 280 20% 90%;
-    --input: 280 20% 95%;
-    --ring: 285 100% 35%;
+    --border: 60 17% 90%;
+    --input: 60 17% 94%;
+    --ring: 140 35% 75%;
 
     /* Spa-specific design tokens */
-    --spa-purple: 285 100% 35%;
-    --spa-purple-light: 300 100% 75%;
-    --spa-purple-dark: 270 100% 25%;
-    --spa-lavender: 280 60% 85%;
-    --spa-cream: 45 100% 96%;
-    --spa-gold: 45 100% 70%;
+    --spa-green: 140 35% 75%;
+    --spa-green-light: 140 50% 85%;
+    --spa-green-dark: 140 35% 65%;
+    --spa-sage: 60 17% 96%;
+    --spa-blue: 200 50% 87%;
+    --spa-peach: 28 100% 86%;
+    --spa-rose: 0 59% 85%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--spa-purple)), hsl(var(--spa-purple-light)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--spa-purple)) 0%, hsl(var(--spa-purple-dark)) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(var(--background)), hsl(var(--spa-lavender) / 0.1));
+    --gradient-primary: linear-gradient(135deg, hsl(var(--spa-green)), hsl(var(--spa-green-light)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--spa-green)) 0%, hsl(var(--spa-green-dark)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(var(--background)), hsl(var(--spa-blue) / 0.1));
 
     /* Shadows */
-    --shadow-elegant: 0 10px 30px -10px hsl(var(--spa-purple) / 0.3);
-    --shadow-glow: 0 0 40px hsl(var(--spa-purple-light) / 0.4);
-    --shadow-soft: 0 4px 20px hsl(var(--spa-purple) / 0.1);
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--spa-green) / 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--spa-green-light) / 0.4);
+    --shadow-soft: 0 4px 20px hsl(var(--spa-green) / 0.1);
 
     --radius: 0.5rem;
 

@@ -54,12 +54,13 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				spa: {
-					purple: 'hsl(var(--spa-purple))',
-					'purple-light': 'hsl(var(--spa-purple-light))',
-					'purple-dark': 'hsl(var(--spa-purple-dark))',
-					lavender: 'hsl(var(--spa-lavender))',
-					cream: 'hsl(var(--spa-cream))',
-					gold: 'hsl(var(--spa-gold))'
+					green: 'hsl(var(--spa-green))',
+					'green-light': 'hsl(var(--spa-green-light))',
+					'green-dark': 'hsl(var(--spa-green-dark))',
+					sage: 'hsl(var(--spa-sage))',
+					blue: 'hsl(var(--spa-blue))',
+					peach: 'hsl(var(--spa-peach))',
+					rose: 'hsl(var(--spa-rose))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
@@ -114,10 +115,10 @@ export default {
 				},
 				'glow': {
 					'0%, 100%': {
-						boxShadow: '0 0 20px hsl(var(--spa-purple-light) / 0.4)'
+						boxShadow: '0 0 20px hsl(var(--spa-green-light) / 0.4)'
 					},
 					'50%': {
-						boxShadow: '0 0 40px hsl(var(--spa-purple-light) / 0.8)'
+						boxShadow: '0 0 40px hsl(var(--spa-green-light) / 0.8)'
 					}
 				}
 			},
