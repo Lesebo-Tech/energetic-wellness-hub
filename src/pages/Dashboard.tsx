@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Calendar, 
   Clock, 
@@ -15,10 +17,25 @@ import {
   TrendingUp,
   CheckCircle2,
   XCircle,
-  Plus
+  Plus,
+  Send
 } from "lucide-react";
 
 const Dashboard = () => {
+  const { toast } = useToast();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  const [chatMessages, setChatMessages] = useState([
+    {
+      id: 1,
+      type: "bot",
+      message: "Hello! I'm EnerBot, your wellness assistant. How can I help you today?",
+      timestamp: new Date()
+    }
+  ]);
+  const [currentMessage, setCurrentMessage] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  
   const [activeBookings] = useState([
     {
       id: 1,
@@ -60,6 +77,66 @@ const Dashboard = () => {
   ]);
 
   const [wellnessScore] = useState(85);
+
+  // Scroll to bottom of chat when new messages arrive
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages]);
+
+  // Simulate AI responses
+  const getAIResponse = (userMessage: string) => {
+    const responses = [
+      "That's a great question! For stress relief, I recommend our Swedish massage or aromatherapy treatments. Both are excellent for reducing cortisol levels and promoting relaxation.",
+      "Based on your wellness goals, I suggest trying our deep tissue massage if you're experiencing muscle tension, or our hot stone therapy for overall relaxation.",
+      "I'd be happy to help you book an appointment! What type of treatment are you most interested in?",
+      "For overall wellness, consider incorporating regular massage sessions into your routine. Even monthly sessions can significantly improve your stress levels and muscle health.",
+      "That sounds perfect for your wellness journey! Would you like me to check our available appointment times for this week?",
+      "Great choice! Our certified therapists specialize in personalized treatments to address your specific needs. When would you prefer to schedule your session?"
+    ];
+    return responses[Math.floor(Math.random() * responses.length)];
+  };
+
+  const handleSendMessage = () => {
+    if (!currentMessage.trim()) {
+      toast({
+        title: "Please enter a message",
+        description: "Type your question before sending.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Add user message
+    const userMsg = {
+      id: Date.now(),
+      type: "user",
+      message: currentMessage,
+      timestamp: new Date()
+    };
+    
+    setChatMessages(prev => [...prev, userMsg]);
+    setCurrentMessage("");
+    setIsTyping(true);
+
+    // Simulate AI response delay
+    setTimeout(() => {
+      const aiResponse = {
+        id: Date.now() + 1,
+        type: "bot",
+        message: getAIResponse(currentMessage),
+        timestamp: new Date()
+      };
+      
+      setChatMessages(prev => [...prev, aiResponse]);
+      setIsTyping(false);
+    }, 1500);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-spa-cream/20">
@@ -305,41 +382,65 @@ const Dashboard = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="h-96 bg-background/50 rounded-lg p-4 mb-4 overflow-y-auto">
+                  <div className="h-96 bg-background/50 rounded-lg p-4 mb-4 overflow-y-auto" id="chat-container">
                     <div className="space-y-4">
-                      <div className="flex items-start space-x-2">
-                        <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
-                          <MessageCircle className="w-4 h-4 text-primary-foreground" />
+                      {chatMessages.map((msg) => (
+                        <div
+                          key={msg.id}
+                          className={`flex items-start space-x-2 ${
+                            msg.type === "user" ? "justify-end" : ""
+                          }`}
+                        >
+                          {msg.type === "bot" && (
+                            <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
+                              <MessageCircle className="w-4 h-4 text-primary-foreground" />
+                            </div>
+                          )}
+                          <div
+                            className={`rounded-lg p-3 max-w-xs ${
+                              msg.type === "bot"
+                                ? "bg-spa-blue/20"
+                                : "bg-primary/10"
+                            }`}
+                          >
+                            <p className="text-sm">{msg.message}</p>
+                          </div>
+                          {msg.type === "user" && (
+                            <div className="w-8 h-8 bg-spa-blue rounded-full flex items-center justify-center">
+                              <User className="w-4 h-4 text-primary" />
+                            </div>
+                          )}
                         </div>
-                        <div className="bg-spa-lavender/20 rounded-lg p-3 max-w-xs">
-                          <p className="text-sm">Hello! I'm EnerBot, your wellness assistant. How can I help you today?</p>
+                      ))}
+                      {isTyping && (
+                        <div className="flex items-start space-x-2">
+                          <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
+                            <MessageCircle className="w-4 h-4 text-primary-foreground" />
+                          </div>
+                          <div className="bg-spa-blue/20 rounded-lg p-3 max-w-xs">
+                            <p className="text-sm">EnerBot is typing...</p>
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex items-start space-x-2 justify-end">
-                        <div className="bg-primary/10 rounded-lg p-3 max-w-xs">
-                          <p className="text-sm">What's the best massage for stress relief?</p>
-                        </div>
-                        <div className="w-8 h-8 bg-spa-lavender rounded-full flex items-center justify-center">
-                          <User className="w-4 h-4 text-spa-purple" />
-                        </div>
-                      </div>
-                      <div className="flex items-start space-x-2">
-                        <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
-                          <MessageCircle className="w-4 h-4 text-primary-foreground" />
-                        </div>
-                        <div className="bg-spa-lavender/20 rounded-lg p-3 max-w-xs">
-                          <p className="text-sm">For stress relief, I recommend a Swedish massage or aromatherapy massage. Both are excellent for relaxation and reducing cortisol levels. Would you like me to help you book one?</p>
-                        </div>
-                      </div>
+                      )}
+                      <div ref={messagesEndRef} />
                     </div>
                   </div>
                   <div className="flex space-x-2">
-                    <input 
-                      type="text" 
+                    <Input
+                      value={currentMessage}
+                      onChange={(e) => setCurrentMessage(e.target.value)}
+                      onKeyPress={handleKeyPress}
                       placeholder="Ask EnerBot anything about wellness..."
-                      className="flex-1 px-3 py-2 border border-spa-lavender/30 rounded-lg focus:border-primary focus:outline-none"
+                      className="flex-1"
+                      disabled={isTyping}
                     />
-                    <Button variant="spa">Send</Button>
+                    <Button 
+                      onClick={handleSendMessage}
+                      variant="spa" 
+                      disabled={isTyping || !currentMessage.trim()}
+                    >
+                      <Send className="w-4 h-4" />
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
