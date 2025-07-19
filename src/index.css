@@ -37,7 +37,7 @@ All colors MUST be HSL.
     --input: 60 17% 94%;
     --ring: 140 35% 75%;
 
-    /* Spa-specific design tokens */
+    /* Spa-specific design tokens - Original Color Scheme */
     --spa-green: 140 35% 75%;
     --spa-green-light: 140 50% 85%;
     --spa-green-dark: 140 35% 65%;
@@ -45,6 +45,13 @@ All colors MUST be HSL.
     --spa-blue: 200 50% 87%;
     --spa-peach: 28 100% 86%;
     --spa-rose: 0 59% 85%;
+    
+    /* Additional spa colors for components */
+    --spa-purple: 280 40% 50%;
+    --spa-lavender: 280 30% 90%;
+    --spa-cream: 45 50% 95%;
+    --spa-gold: 45 100% 70%;
+    --spa-purple-light: 280 40% 70%;
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--spa-green)), hsl(var(--spa-green-light)));

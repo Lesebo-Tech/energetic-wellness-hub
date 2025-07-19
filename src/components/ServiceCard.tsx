@@ -38,7 +38,7 @@ const ServiceCard = ({ title, description, duration, price, image, onBook }: Ser
             <span>{duration}</span>
           </div>
           <div className="flex items-center space-x-1">
-            <DollarSign className="w-4 h-4" />
+            <span className="text-xs">ZAR</span>
             <span className="font-semibold">{price}</span>
           </div>
         </div>

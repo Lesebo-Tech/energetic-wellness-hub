@@ -150,7 +150,7 @@ const Dashboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-3xl font-bold text-spa-purple mb-2">
-                    Welcome back, Sarah! ✨
+                    Welcome back, {localStorage.getItem('userName') || 'Guest'}! ✨
                   </h1>
                   <p className="text-muted-foreground">
                     Your wellness journey continues. Ready for your next relaxing session?

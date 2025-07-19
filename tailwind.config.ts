@@ -60,7 +60,12 @@ export default {
 					sage: 'hsl(var(--spa-sage))',
 					blue: 'hsl(var(--spa-blue))',
 					peach: 'hsl(var(--spa-peach))',
-					rose: 'hsl(var(--spa-rose))'
+					rose: 'hsl(var(--spa-rose))',
+					purple: 'hsl(var(--spa-purple))',
+					lavender: 'hsl(var(--spa-lavender))',
+					cream: 'hsl(var(--spa-cream))',
+					gold: 'hsl(var(--spa-gold))',
+					'purple-light': 'hsl(var(--spa-purple-light))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
